@@ -1,0 +1,115 @@
+<!-- <?php
+    include "db_connect.php";
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+        $username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+        $email = filter_var($_POST['email'], FILTER_VALIDATE_EMAIL);
+        $password = filter_var($_POST['password'], FILTER_SANITIZE_STRING);
+        $repassword = filter_var($_POST['repassword'], FILTER_SANITIZE_STRING);
+        $phone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);
+        $address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
+        
+        if ($password !== $repassword) {
+            die("Passwords do not match.");
+        }
+
+        // Image upload validation
+        $allowed_file_types = ['image/jpeg', 'image/png'];
+        $file = $_FILES['file'];
+        if (in_array($file['type'], $allowed_file_types)) {
+            $target_directory = "uploads/";
+            $target_file = $target_directory . basename($file['name']);
+            if (move_uploaded_file($file['tmp_name'], $target_file)) {
+                echo "The file ". basename($file['name']). " has been uploaded.";
+            } else {
+                echo "Sorry, there was an error uploading your file.";
+            }
+        } else {
+            echo "Only JPG and PNG files are allowed.";
+        }
+    }
+?> -->
+
+
+
+
+
+
+
+
+<?php
+
+include "db_connect.php";
+
+// Sanitize and validate input data
+$name = filter_var($_POST['name'], FILTER_SANITIZE_STRING);
+$username = filter_var($_POST['username'], FILTER_SANITIZE_STRING);
+$email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$phone = filter_var($_POST['phone'], FILTER_SANITIZE_STRING);
+$state = filter_var($_POST['state'], FILTER_SANITIZE_STRING);
+$district = filter_var($_POST['district'], FILTER_SANITIZE_STRING);
+$city = filter_var($_POST['city'], FILTER_SANITIZE_STRING);
+$dob = filter_var($_POST['dob'], FILTER_SANITIZE_STRING);
+$gender = filter_var($_POST['gender'], FILTER_SANITIZE_STRING);
+$course = filter_var(implode(", ", $_POST['course']), FILTER_SANITIZE_STRING);
+$address = filter_var($_POST['address'], FILTER_SANITIZE_STRING);
+
+// File upload handling
+$target_dir = "uploads/";
+$target_file = $target_dir . basename($_FILES["file"]["name"]);
+$imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+$uploadOk = 1;
+
+// Check if image file is a actual image or fake image
+$check = getimagesize($_FILES["file"]["tmp_name"]);
+if($check !== false) {
+    $uploadOk = 1;
+} else {                                    
+    echo "File is not an image.";
+    $uploadOk = 0;
+}
+
+// Check file size
+if ($_FILES["file"]["size"] > 500000) {
+    echo "Sorry, your file is too large.";
+    $uploadOk = 0;
+}
+
+// Allow certain file formats
+if($imageFileType != "jpg" && $imageFileType != "png") {
+    echo "Sorry, only JPG & PNG files are allowed.";
+    $uploadOk = 0;
+}
+
+// Check if $uploadOk is set to 0 by an error
+if ($uploadOk == 0) {
+    echo "Sorry, your file was not uploaded.";
+// if everything is ok, try to upload file
+} else {
+    if (move_uploaded_file($_FILES["file"]["tmp_name"], $target_file)) {
+        echo "The file ". htmlspecialchars( basename( $_FILES["file"]["name"])). " has been uploaded.";
+    } else {
+        echo "Sorry, there was an error uploading your file.";
+    }
+}
+
+// Insert data into the database
+$sql = "INSERT INTO users (name, username, email, password, phone, state, district, city, dob, gender, course, address, profile_image) 
+        VALUES ('$name', '$username', '$email', '$password', '$phone', '$state', '$district', '$city', '$dob', '$gender', '$course', '$address', '$target_file')";
+
+if ($conn->query($sql) === TRUE) {
+  echo "New record created successfully";
+} else {
+  echo "Error: " . $sql . "<br>" . $conn->error;
+}
+
+$conn->close();
+?>
+
+
+
+show  data like that in table OK.  are you  got  it, YES after that inform me, SURE, THANKS
+
+comment aall thhe code  ttake seepartte file jjsut usse2,,3 coloumnns inseert into ttable dontt add anny vvallidattion ok writee in single ppage dbb connectioon also oonly tablle create no nneed databas alrredy databasses iis thre right..creaate another ttable yes okyyes 
