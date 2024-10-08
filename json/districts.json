@@ -1,0 +1,15 @@
+{
+  "chhattisgarh": [
+    {"id": "bilaspur", "name": "Bilaspur District"},
+    {"id": "durg", "name": "Durg District"},
+    {"id": "raipur", "name": "Raipur District"}
+  ],
+  "hyderabad": [
+    {"id": "hyderabad", "name": "Hyderabad District"},
+    {"id": "secunderabad", "name": "Secunderabad District"}
+  ],
+  "maharashtra": [
+    {"id": "mumbai", "name": "Mumbai District"},
+    {"id": "pune", "name": "Pune District"}
+  ]
+}
