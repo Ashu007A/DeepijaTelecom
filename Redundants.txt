@@ -108,6 +108,7 @@ if ($conn->query($sql) === TRUE) {
 $conn->close();
 ?>
 
+Yoyo
 
 
 show  data like that in table OK.  are you  got  it, YES after that inform me, SURE, THANKS
