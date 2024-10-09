@@ -5,6 +5,8 @@ if (!isset($_SESSION['admin_username'])) {
     exit();
 }
 
+$timeout_duration = 60;
+
 $current_page = basename($_SERVER['PHP_SELF']);
 
 include "db_connect.php";

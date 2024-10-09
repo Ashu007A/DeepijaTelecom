@@ -51,6 +51,8 @@ print "\$names[0] = $names[0]\n";
 print "\$names[1] = $names[1]\n";
 print "\$names[2] = $names[2]\n";
 
+# Also works with negative index
+
 # ---------------------------------------------------------------------
 
 # HASH VARIABLES
@@ -70,3 +72,84 @@ $size = @names;
 
 print "Given names are : @copy\n";
 print "Number of names are : $size\n";
+
+# ---------------------------------------------------------------------
+
+# SPECIAL LITERALS
+print "File name ". __FILE__ . "\n";
+print "Line Number " . __LINE__ ."\n";
+print "Package " . __PACKAGE__ ."\n";
+
+# they can not be interpolated
+print "__FILE__ __LINE__ __PACKAGE__\n";
+
+
+# ---------------------------------------------------------------------
+
+#HASHES
+%data = ('John Paul', 45, 'Lisa', 30, 'Kumar', 40);
+
+print "\$data{'John Paul'} = $data{'John Paul'}\n";
+print "\$data{'Lisa'} = $data{'Lisa'}\n";
+print "\$data{'Kumar'} = $data{'Kumar'}\n";
+
+# ---------------------------------------------------------------------
+
+# CURRENT DATE AND TIME
+@months = qw( Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec );
+@days = qw(Sun Mon Tue Wed Thu Fri Sat Sun);
+
+($sec,$min,$hour,$mday,$mon,$year,$wday,$yday,$isdst) = localtime();
+print "$mday $months[$mon] $days[$wday]\n";
+
+$datestring = localtime();
+print "Local date and time $datestring\n";
+
+# ---------------------------------------------------------------------
+
+# FILE OPEN FUNCTION
+open(DATA, "<Redundants.txt") or die "Couldn't open file file.txt, $!";
+
+while(<DATA>) {
+   print "$_";
+}
+
+# FILE CLOSE FUNCTION
+close FILEHANDLE
+close
+
+# ---------------------------------------------------------------------
+
+# EMAIL SENDING
+$to = 'aram.work.98@gmail.com';
+$from = 'webmaster@yourdomain.com';
+$subject = 'Test Email';
+$message = 'This is test email sent by Perl Script';
+ 
+open(MAIL, "|/usr/sbin/sendmail -t");
+ 
+# Email Header
+print MAIL "To: $to\n";
+print MAIL "From: $from\n";
+print MAIL "Subject: $subject\n\n";
+# Email Body
+print MAIL $message;
+
+close(MAIL);
+print "Email Sent Successfully\n";
+
+# ---------------------------------------------------------------------
+
+# ---------------------------------------------------------------------
+
+# ---------------------------------------------------------------------
+
+# ---------------------------------------------------------------------
+
+# ---------------------------------------------------------------------
+
+# ---------------------------------------------------------------------
+
+# ---------------------------------------------------------------------
+
+# ---------------------------------------------------------------------
