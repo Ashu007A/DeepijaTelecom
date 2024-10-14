@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Promises</title>
+  <script>
+    window.onload = function() {
+        function simulateNetworkRequest() {
+            return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                var success = Math.random() > 0.5;
+                if (success) {
+                    resolve("Request was successful!");
+                } else {
+                    reject("Request failed!");
+                }
+            }, 2000);
+            });
+      }
+
+      simulateNetworkRequest()
+        .then(message => document.write(message + "<br>"))
+        .catch(error => document.write(error + "<br>"));
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>

@@ -47,6 +47,21 @@ $result = $conn->query($sql);
             font-weight: bold;
             background-color: lightgray;
         }
+        .center-button {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 10vh;
+        }
+        .center-button button {
+            background-color: green;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     
@@ -72,6 +87,10 @@ $result = $conn->query($sql);
             <li><a href="admin_dashboard.php" class="<?php echo $current_page == 'admin_dashboard.php' ? 'active' : ''; ?>">Admin Dashboard</a></li>
         </ul>
     </nav>
+
+    <div class="center-button">
+        <button onclick="confirmAddUser()">Add New User</button>
+    </div>
 
     <h2>All Users Data</h2>
     <table class="table table-bordered table-hover">
@@ -122,6 +141,12 @@ $result = $conn->query($sql);
     </table>
     
     <script>
+        function confirmAddUser() {
+            if (confirm("Do you want to add a new user?")) {
+                window.location.href = "admin_add_user.php";
+            }
+        }
+        
         function confirmEdit(userId) {
             if (confirm("Do you want to edit this user?")) {
                 window.location.href = "admin_edit_profile.php?id=" + userId;

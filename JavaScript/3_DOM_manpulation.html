@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DOM Manipulation</title>
+
+  <style>
+    .center-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 300px;
+    }
+  </style>
+
+  <script>
+    window.onload = function() {
+      document.getElementById("changeText").onclick = function() {
+        var myDiv = document.getElementById("myDiv");
+        myDiv.textContent = "Deepija Telecom Pvt. Ltd.";
+        myDiv.style.backgroundColor = "lightblue";
+      }
+    }
+  </script>
+</head>
+<body>
+    <div class="center-button">
+        <button id="changeText">Click to get Company Name</button>
+        <p>---|</p>
+        <div id="myDiv" style="width: 200px; height: 100px; border: 1px solid black;">Company Name</div>
+    </div>
+</body>
+</html>

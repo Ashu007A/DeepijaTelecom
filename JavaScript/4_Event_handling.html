@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Event Handling</title>
+
+  <style>
+    form {
+        margin-top: 300px;
+        margin-left: 600px;
+    }
+    p {
+        text-align: center;
+    }
+  </style>
+
+  <script>
+    window.onload = function() {
+      document.getElementById("displayButton").onclick = function() {
+        var inputValue = document.getElementById("inputField").value;
+        document.getElementById("output").textContent = inputValue;
+      }
+    }
+  </script>
+</head>
+<body>
+  <form>
+    <input type="text" id="inputField">
+    <button type="button" id="displayButton">Display</button>
+  </form>
+  <p id="output"></p>
+</body>
+</html>

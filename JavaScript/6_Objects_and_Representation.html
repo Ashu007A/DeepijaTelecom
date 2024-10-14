@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Objects</title>
+
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+  </style>
+  
+  <script>
+    window.onload = function() {
+      var car = {
+        make: 'Maruti',
+        model: 'Swift',
+        year: 2019
+      };
+
+      function describeCar(car) {
+        document.write("The car is a " + car.year + " " + car.make + " " + car.model + ".<br>");
+      }
+
+      describeCar(car);
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>

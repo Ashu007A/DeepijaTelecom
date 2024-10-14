@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+  <script>
+    window.onload = function() {
+        var toDoList = JSON.parse(localStorage.getItem('toDoList')) || [];
+
+        function renderList() {
+            var list = document.getElementById('list');
+            list.innerHTML = '';
+            toDoList.forEach((item, index) => {
+                var listItem = document.createElement('li');
+                listItem.textContent = item;
+                list.appendChild(listItem);
+            });
+        }
+
+        document.getElementById('addButton').onclick = function() {
+            var task = document.getElementById('taskInput').value;
+            if (task) {
+                toDoList.push(task);
+                localStorage.setItem('toDoList', JSON.stringify(toDoList));
+                renderList();
+                document.getElementById('taskInput').value = '';
+            }
+        };
+
+      renderList();
+    }
+  </script>
+</head>
+<body>
+    <h1>To-Do List</h1>
+    <input type="text" id="taskInput" placeholder="Enter a new task">
+    <button id="addButton">Add Task</button>
+    <ul id="list"></ul>
+</body>
+</html>

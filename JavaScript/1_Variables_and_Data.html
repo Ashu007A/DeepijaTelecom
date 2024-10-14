@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Variables and Data Types</title>
+  <script>
+    window.onload = function() {
+      var myString = "Hello, World!";
+      var myNumber = 42;
+      var myBoolean = true;
+      var myObject = { name: "Alice", age: 30 };
+      var myArray = [1, 2, 3, 4, 5];
+
+      console.log("myString is of type: " + typeof myString);
+      console.log("myNumber is of type: " + typeof myNumber);
+      console.log("myBoolean is of type: " + typeof myBoolean);
+      console.log("myObject is of type: " + typeof myObject);
+      console.log("myArray is of type: " + typeof myArray);
+
+      document.getElementById("check1").innerHTML = screen.width;
+      document.getElementById("check2").innerHTML = screen.height;
+      document.getElementById("check3").innerHTML = navigator.platform;
+    }
+  </script>
+</head>
+<body>
+  <p id="check1"></p>
+  <p id="check2"></p>
+  <p id="check3"></p>
+</body>
+</html>

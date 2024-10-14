@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Functions</title>
+  <script>
+    window.onload = function() {
+      function sumArray(numbers) {
+        var sum = 0;
+        for (var i = 0; i < numbers.length; i++) {
+          sum += numbers[i];
+        }
+        return sum;
+      }
+
+      console.log(sumArray([1, 2, 3, 4, 5]));
+      console.log(sumArray([10, 20, 30]));
+      document.body.innerHTML = sumArray([70, 20, 10, 50]);
+    }
+  </script>
+</head>
+<body>
+</body>
+</html>
