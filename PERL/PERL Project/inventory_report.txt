@@ -1,0 +1,7 @@
+Total number of products: 5
+Total stock value: 3707085/-
+Category Summary:
+Electronics - 2 products, Total value: 3414983
+Fashion - 1 products, Total value: 127500
+Sports - 1 products, Total value: 14652
+Furniture - 1 products, Total value: 149950

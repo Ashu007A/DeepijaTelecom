@@ -1,0 +1,28 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: #f0f0f0;
+  margin: 0;
+}
+
+.verification {
+  text-align: center;
+}
+
+.code-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.code {
+  width: 60px;
+  height: 80px;
+  font-size: 48px;
+  text-align: center;
+  margin: 0 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
