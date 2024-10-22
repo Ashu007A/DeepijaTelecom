@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
     $username = $_POST["username"];
     $email = $_POST["email"];
-    $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+    // $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $phone = $_POST["phone"];
     $state = $_POST["state"];
     $district = $_POST["district"];
@@ -53,22 +53,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             address='$address' 
             WHERE id='$user_id'";
 
-    if ($password) {
-        $sql = "UPDATE users SET 
-                name='$name', 
-                username='$username', 
-                email='$email', 
-                password='$password', 
-                phone='$phone', 
-                state='$state', 
-                district='$district', 
-                city='$city', 
-                dob='$dob', 
-                gender='$gender', 
-                course='$course', 
-                address='$address' 
-                WHERE id='$user_id'";
-    }
+    // if ($password) {
+    //     $sql = "UPDATE users SET 
+    //             name='$name', 
+    //             username='$username', 
+    //             email='$email', 
+    //             password='$password', 
+    //             phone='$phone', 
+    //             state='$state', 
+    //             district='$district', 
+    //             city='$city', 
+    //             dob='$dob', 
+    //             gender='$gender', 
+    //             course='$course', 
+    //             address='$address' 
+    //             WHERE id='$user_id'";
+    // }
 
     if ($conn->query($sql) === TRUE) {
         echo "Profile updated successfully!";

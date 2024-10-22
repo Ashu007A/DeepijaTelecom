@@ -92,8 +92,8 @@ if ($result->num_rows > 0) {
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required><br><br>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter new password if you want to change it"><br><br>
+        <!-- <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter new password if you want to change it"><br><br> -->
 
         <label for="phone">Phone Number:</label>
         <input type="tel" id="phone" name="phone" value="<?php echo $user['phone']; ?>" required><br><br>

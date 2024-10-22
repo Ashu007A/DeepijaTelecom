@@ -18,7 +18,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
         margin: 0;
     }
     form {
-      margin: 300px auto;
+      margin: 150px auto;
       width: 20%;
     }
     h1 {
@@ -53,13 +53,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
       }
     ?>
 
+    <h2 style="text-align: center">USER LOGIN</h2>
 
     <form action="login_process.php" method="post">
           <label for="username">Username:</label>
           <input type="text" id="username" name="username" required><br><br>
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" required><br><br>
-          <input type="submit" value="Submit">
+          <input type="submit" value="Submit" style="margin-left:30%;">
     </form>
 </body>
 </html>

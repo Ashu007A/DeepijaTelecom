@@ -36,6 +36,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
       <li><a href="register.php" class="<?php echo $current_page == 'register.php' ? 'active' : ''; ?>">Register New User</a></li>
     </ul>
   </nav>
+  <h2 style="text-align: center">REGISTRATION FORM</h2>
   <form action="process_form.php" method="post">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required><br><br>

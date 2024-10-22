@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function() {
         alert("Passwords do not match");
       }
   
-      // Simple email regex for demo purposes
+      // Simple email regex
       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailPattern.test(email)) {
         isValid = false;
