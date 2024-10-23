@@ -18,31 +18,22 @@ if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) >
 
 // Update last activity timestamp
 $_SESSION['last_activity'] = time();
-
-$current_page = basename($_SERVER['PHP_SELF']);
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Delete Account</title>
+    <title>Change Password</title>
     <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
-        body {
-            justify-content: center;
-            align-items: center;
+        form {
+            margin: 0 auto;
+            width: 40%;
         }
         h1 {
             font-size: larger;
             float: left;
-            color: yellow;
-        }
-        h2, p {
-            text-align: center;
-        }
-        form {
-        margin: 30px auto;
-        width: 15%;
+            color: #ff9a9e;
         }
         .active {
             color: black;
@@ -68,15 +59,29 @@ $current_page = basename($_SERVER['PHP_SELF']);
             <li><a href="logout.php" class="<?php echo $current_page == 'logout.php' ? 'active' : ''; ?>" onclick="confirmLogout(event)">Logout</a></li>
             <li><a href="contact.php" class="<?php echo $current_page == 'contact.php' ? 'active' : ''; ?>">Contact</a></li>
             <li><a href="delete_account.php" class="<?php echo $current_page == 'delete_account.php' ? 'active' : ''; ?>">Delete Account</a></li>
+            <li><a href="change_user_password.php" class="<?php echo $current_page == 'change_user_password.php' ? 'active' : ''; ?>">Change Password</a></li>
             <li><a href="edit_profile.php" class="<?php echo $current_page == 'edit_profile.php' ? 'active' : ''; ?>">Edit Profile</a></li>
             <li><a href="dashboard.php" class="<?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>">Dashboard</a></li>
         </ul>
     </nav>
-    <h2>Delete Account</h2>
-    <br><br><br><br><br><br><br>
-    <p>Are you sure you want to delete your account?</p>
-    <form action="delete_account_process.php" method="post">
-        <input type="submit" value="Yes, delete my account" style="background-color: red; color: white;">
-    </form>
+    <div class="container mt-5">
+        <h2 class="text-center">Change Password</h2>
+        <br><br><br><br><br>
+        <form action="process_password_change.php" method="post">
+            <div class="form-group">
+                <label for="old_password">Old Password:</label>
+                <input type="password" class="form-control" id="old_password" name="old_password" required>
+            </div>
+            <div class="form-group">
+                <label for="new_password">New Password:</label>
+                <input type="password" class="form-control" id="new_password" name="new_password" required>
+            </div>
+            <div class="form-group">
+                <label for="confirm_password">Re-enter New Password:</label>
+                <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Change Password</button>
+        </form>
+    </div>
 </body>
 </html>

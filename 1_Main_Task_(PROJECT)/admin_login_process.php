@@ -26,9 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     } else {
-        $_SESSION['error'] = "No admin found with that username.";
-        header("Location: admin_login.php");
-        exit();
+        echo '<script>
+                    alert("Username or password entered was wrong!");
+                    window.location.href = "admin_login.php";
+                </script>';
+        // $_SESSION['error'] = "No admin found with that username.";
+        // header("Location: admin_login.php");
+        // exit();
     }
     
     // $conn->close();

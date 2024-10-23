@@ -62,6 +62,10 @@ $result = $conn->query($sql);
             font-size: 16px;
             font-weight: bold;
         }
+
+        .table-bordered table-hover {
+            width: 70%;
+        }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     
@@ -80,6 +84,7 @@ $result = $conn->query($sql);
     </script>
 </head>
 <body>
+    <div class="navigation">
     <nav>
         <ul>
             <h1>Deepija Telecom Pvt. Ltd.</h1>
@@ -87,9 +92,12 @@ $result = $conn->query($sql);
             <li><a href="admin_dashboard.php" class="<?php echo $current_page == 'admin_dashboard.php' ? 'active' : ''; ?>">Admin Dashboard</a></li>
         </ul>
     </nav>
+    </div>
 
+    <div class="heading">
     <div class="center-button">
         <button onclick="confirmAddUser()">Add New User</button>
+    </div>
     </div>
 
     <h2>All Users Data</h2>
@@ -139,6 +147,10 @@ $result = $conn->query($sql);
             ?>
         </tbody>
     </table>
+
+    <div class="center-button">
+        <button onclick="confirmAddUser()">Add New User</button>
+    </div>
     
     <script>
         function confirmAddUser() {

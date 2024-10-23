@@ -8,14 +8,20 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <title>Register</title>
   <link rel="stylesheet" type="text/css" href="styles.css">
   <style>
+    body {
+        background-image: url('background.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+    }
     form {
-      margin: 0 auto;
+      margin: 30px auto;
       width: 40%;
     }
     h1 {
       font-size: larger;
       float: left;
-      color: yellow;
+      color: #ff9a9e;
     }
     .active {
       color: black;
@@ -27,16 +33,19 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <script src="script.js" defer></script>
 </head>
 <body>
+<div class="navigation">
   <nav>
     <ul>
       <h1>Deepija Telecom Pvt. Ltd.</h1>
-      <!-- <li><a href="home.html">Home</a></li> -->
       <li><a href="admin_login.php" class="<?php echo $current_page == 'admin_login.php' ? 'active' : ''; ?>">Admin Login</a></li>
       <li><a href="login.php" class="<?php echo $current_page == 'login.php' ? 'active' : ''; ?>">User Login</a></li>
       <li><a href="register.php" class="<?php echo $current_page == 'register.php' ? 'active' : ''; ?>">Register New User</a></li>
     </ul>
   </nav>
-  <h2 style="text-align: center">REGISTRATION FORM</h2>
+</div>
+  <div class="heading">
+  <h2 style="text-align: center;">REGISTRATION FORM</h2>
+  </div>
   <form action="process_form.php" method="post">
     <label for="name">Name:</label>
     <input type="text" id="name" name="name" required><br><br>

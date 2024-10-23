@@ -71,8 +71,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // }
 
     if ($conn->query($sql) === TRUE) {
-        echo "Profile updated successfully!";
-        header("Location: dashboard.php");
+        // echo "Profile updated successfully!";
+        // header("Location: dashboard.php");
+        echo '<script>
+                    alert("Profile updated successfully!");
+                    window.location.href = "dashboard.php";
+                </script>';
+                exit();
     } else {
         echo "Error updating profile: " . $conn->error;
     }

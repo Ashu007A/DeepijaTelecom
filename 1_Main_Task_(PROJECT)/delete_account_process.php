@@ -25,11 +25,15 @@ $username = $_SESSION['username'];
 
 $sql = "DELETE FROM users WHERE username = '$username'";
 if ($conn->query($sql) === TRUE) {
-    echo "Record deleted successfully";
+    // echo "Record deleted successfully";
+    echo '<script>
+            alert("Account deleted successfully");
+            window.location.href = "register.php";
+        </script>';
     
     session_unset();
     session_destroy();
-    header("Location: home.html");
+    // header("Location: register.php");
     exit();
 } else {
     echo "Error deleting record: " . $conn->error;

@@ -26,9 +26,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             exit();
         }
     } else {
-        $_SESSION['error'] = "No user found with that username.";
-        header("Location: login.php");
-        exit();
+        echo '<script>
+                    alert("Username or password entered was wrong!");
+                    window.location.href = "login.php";
+                </script>';
+        // $_SESSION['error'] = "No user found with that username.";
+        // header("Location: login.php");
+        // exit();
     }
     
     // $conn->close();

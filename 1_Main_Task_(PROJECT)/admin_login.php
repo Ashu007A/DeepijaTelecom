@@ -9,7 +9,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <link rel="stylesheet" type="text/css" href="styles.css">
   <style>
     body {
-        background-image: url('image4.jpg');
+        background-image: url('background.jpg');
         background-size: cover;
         /* display: flex; */
         justify-content: center;
@@ -24,7 +24,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     h1 {
       font-size: larger;
       float: left;
-      color: yellow;
+      color: #ff9a9e;
     }
     .active {
       color: black;
@@ -38,7 +38,6 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <nav>
         <ul>
           <h1>Deepija Telecom Pvt. Ltd.</h1>
-          <!-- <li><a href="home.html">Home</a></li> -->
           <li><a href="admin_login.php" class="<?php echo $current_page == 'admin_login.php' ? 'active' : ''; ?>">Admin Login</a></li>
           <li><a href="login.php" class="<?php echo $current_page == 'login.php' ? 'active' : ''; ?>">User Login</a></li>
           <li><a href="register.php" class="<?php echo $current_page == 'register.php' ? 'active' : ''; ?>">Register New User</a></li>
@@ -53,14 +52,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
       }
     ?>
 
-    <h2 style="text-align: center">USER LOGIN</h2>
+    <h2 style="text-align: center; color: white;">ADMIN LOGIN</h2>
 
-    <form action="login_process.php" method="post">
+    <form action="admin_login_process.php" method="post">
           <label for="username">Username:</label>
           <input type="text" id="username" name="username" required><br><br>
           <label for="password">Password:</label>
           <input type="password" id="password" name="password" required><br><br>
-          <input type="submit" value="Submit" style="margin-left:30%;">
+          <input type="submit" value="Submit" style="margin-left:35%;">
     </form>
 </body>
 </html>

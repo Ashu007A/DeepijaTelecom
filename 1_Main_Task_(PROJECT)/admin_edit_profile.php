@@ -1,7 +1,7 @@
 <?php
 session_start();
-if (!isset($_SESSION['username'])) {
-    header("Location: login.html");
+if (!isset($_SESSION['admin_username'])) {
+    header("Location: admin_login.php");
     exit();
 }
 
@@ -12,27 +12,30 @@ $timeout_duration = 60;
 if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity']) > $timeout_duration) {
     session_unset();
     session_destroy();
-    header("Location: login.php");
+    header("Location: admin_login.php");
     exit();
 }
 
 // Update last activity timestamp
 $_SESSION['last_activity'] = time();
 
-$current_page = basename($_SERVER['PHP_SELF']);
-
 include "db_connect.php";
 
-$username = $_SESSION['username'];
+if (isset($_GET['id'])) {
+    $user_id = $_GET['id'];
 
-// Fetch user data from the database
-$sql = "SELECT * FROM users WHERE username = '$username'";
-$result = $conn->query($sql);
+    // Fetch user data from the database
+    $sql = "SELECT * FROM users WHERE id = $user_id";
+    $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    $user = $result->fetch_assoc();
+    if ($result->num_rows > 0) {
+        $user = $result->fetch_assoc();
+    } else {
+        echo "User not found!";
+        exit();
+    }
 } else {
-    echo "User not found!";
+    echo "Invalid request!";
     exit();
 }
 ?>
@@ -71,18 +74,20 @@ if ($result->num_rows > 0) {
     <script src="script.js" defer></script>
 </head>
 <body>
+    <div class="navigation">
     <nav>
         <ul>
             <h1>Deepija Telecom Pvt. Ltd.</h1>
             <li><a href="logout.php" class="<?php echo $current_page == 'logout.php' ? 'active' : ''; ?>" onclick="confirmLogout(event)">Logout</a></li>
-            <li><a href="contact.php" class="<?php echo $current_page == 'contact.php' ? 'active' : ''; ?>">Contact</a></li>
-            <li><a href="delete_account.php" class="<?php echo $current_page == 'delete_account.php' ? 'active' : ''; ?>">Delete Account</a></li>
-            <li><a href="edit_profile.php" class="<?php echo $current_page == 'edit_profile.php' ? 'active' : ''; ?>">Edit Profile</a></li>
-            <li><a href="dashboard.php" class="<?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>">Dashboard</a></li>
+            <li><a href="admin_dashboard.php" class="<?php echo $current_page == 'admin_dashboard.php' ? 'active' : ''; ?>">Admin Dashboard</a></li>
         </ul>
     </nav>
+    </div>
+    <div class="heading">
     <h2 style="text-align: center;">Edit Profile</h2>
-    <form action="update_profile.php" method="post">
+    </div>
+    <form action="admin_update_profile.php" method="post">
+        <input type="hidden" name="id" value="<?php echo $user['id']; ?>">
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<?php echo $user['name']; ?>" required><br><br>
 
@@ -91,9 +96,6 @@ if ($result->num_rows > 0) {
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required><br><br>
-
-        <!-- <label for="password">Password:</label>
-        <input type="password" id="password" name="password" placeholder="Enter new password if you want to change it"><br><br> -->
 
         <label for="phone">Phone Number:</label>
         <input type="tel" id="phone" name="phone" value="<?php echo $user['phone']; ?>" required><br><br>
