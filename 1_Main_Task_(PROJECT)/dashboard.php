@@ -24,6 +24,10 @@ $current_page = basename($_SERVER['PHP_SELF']);
 include "db_connect.php";
 
 $username = $_SESSION['username'];
+
+$punch_sql = "SELECT * FROM time_entries WHERE username = '$username'";
+$punch_result = $conn->query($punch_sql);
+
 $sql = "SELECT * FROM users WHERE username = '$username'";
 $result = $conn->query($sql);
 ?>
@@ -35,6 +39,16 @@ $result = $conn->query($sql);
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
+        #upper {
+            padding-top: 40px;
+        }
+        .clock {
+            height: 65px;
+        }
+        #currentDateTime {
+            font-size: xx-large;
+            font-weight: bold;
+        }
         h1 {
             font-size: larger;
             float: left;
@@ -48,14 +62,99 @@ $result = $conn->query($sql);
             font-weight: bold;
             background-color: lightgray;
         }
+        #exportBtn {
+            margin-bottom: 60px;
+        }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script>
+        function updateDateTime() {
+            setInterval(() => {
+                const now = new Date();
+                const formattedTime = now.toLocaleTimeString();
+                const formattedDate = now.toLocaleDateString();
+                document.getElementById('currentDateTime').innerText = formattedDate + ' ' + formattedTime;
+            }, 1000);
+        }
+
+        document.addEventListener('DOMContentLoaded', updateDateTime);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            updateDateTime();
+
+            // Fetch previous punch-in status
+            fetch('punch_status.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.punchedIn) {
+                        document.getElementById('punchInBtn').disabled = true;
+                        document.getElementById('punchOutBtn').disabled = false;
+                    } else {
+                        document.getElementById('punchInBtn').disabled = false;
+                        document.getElementById('punchOutBtn').disabled = true;
+                    }
+                });
+
+            // Fetch and populate punch details
+            fetch('fetch_todays_punch_details.php')
+                .then(response => response.json())
+                .then(data => {
+                    const tableBody = document.getElementById('punchInOutTable').querySelector('tbody');
+                    data.forEach(entry => {
+                        const row = document.createElement("tr");
+                        row.setAttribute("data-id", entry.id);
+                        row.innerHTML = `
+                            <td>${entry.punchIn}</td>
+                            <td>${entry.punchOut || ''}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                });
+        });
+
+        function punchIn() {
+            fetch('punch.php?action=in')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const row = document.createElement("tr");
+                        row.setAttribute("data-id", data.entryId);
+                        const localDateTime = new Date(data.punchIn).toLocaleString();
+                        row.innerHTML = `
+                            <td>${localDateTime}</td>
+                            <td></td>
+                        `;
+                        document.getElementById('punchInOutTable').querySelector('tbody').appendChild(row);
+                        document.getElementById('punchInBtn').disabled = true;
+                        document.getElementById('punchOutBtn').disabled = false;
+                    } else {
+                        alert(data.message);
+                    }
+                });
+        }
+
+        function punchOut() {
+            fetch('punch.php?action=out')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        const row = document.querySelector(`tr[data-id='${data.entryId}']`);
+                        const localDateTime = new Date(data.punchOut).toLocaleString();
+                        row.querySelector('td:nth-child(2)').textContent = localDateTime;
+                        document.getElementById('punchInBtn').disabled = false;
+                        document.getElementById('punchOutBtn').disabled = true;
+                    } else {
+                        alert(data.message);
+                    }
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', updateDateTime);
+
         function confirmLogout(event) {
             event.preventDefault();
             var userConfirmed = confirm("Are you sure you want to log out?");
@@ -66,22 +165,51 @@ $result = $conn->query($sql);
     </script>
 </head>
 <body>
+    <div class="navigation">
     <nav>
         <ul>
             <h1>Deepija Telecom Pvt. Ltd.</h1>
             <li><a href="logout.php" class="<?php echo $current_page == 'logout.php' ? 'active' : ''; ?>" onclick="confirmLogout(event)">Logout</a></li>
             <li><a href="contact.php" class="<?php echo $current_page == 'contact.php' ? 'active' : ''; ?>">Contact</a></li>
             <li><a href="delete_account.php" class="<?php echo $current_page == 'delete_account.php' ? 'active' : ''; ?>">Delete Account</a></li>
-            <li><a href="change_user_password.php" class="<?php echo $current_page == 'change_user_password.php' ? 'active' : ''; ?>">Change Password</a></li>
+            <li><a href="change_user_password.php" class="<?php echo $current_page == 'change_user_password.php' ? 'active' : ''; ?>">Change Username/Password</a></li>
             <li><a href="edit_profile.php" class="<?php echo $current_page == 'edit_profile.php' ? 'active' : ''; ?>">Edit Profile</a></li>
             <li><a href="dashboard.php" class="<?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>">Dashboard</a></li>
         </ul>
     </nav>
+    </div>
+    <div id="upper" class="container mt-5 text-center">
+        <h2 class="text-center">Date Time Entry</h2>
+        <div class="clock">
+            <p id="currentDateTime"></p>
+        </div>
+        <button onclick="punchIn()" id="punchInBtn" class="btn btn-info">
+            Punch In  <i class="fa fa-sign-in" style="font-size:20px;color:green"></i>
+        </button>
+        <button onclick="punchOut()" id="punchOutBtn" class="btn btn-info">
+            Punch Out <i class="fa fa-sign-out" style="font-size:20px;color:red"></i>
+        </button>
+    </div>
+    
+    <div class="container mt-5 text-center">
+        <h2 class="text-center">Daily Time Entry Report</h2>
+        <table class="table table-bordered" id="punchInOutTable">
+            <thead>
+                <tr>
+                    <th>Punch In</i></th>
+                    <th>Punch Out</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Rows -->
+            </tbody>
+        </table>
+    </div>
     <div class="container mt-5">
         <h2 class="text-center">User Dashboard</h2>
         <?php if ($result->num_rows > 0): ?>
             <?php $user = $result->fetch_assoc(); ?>
-            <table class="table table-bordered">
+            <table class="table table-bordered" id="userDashboardTable">
                 <tr>
                     <th>ID</th>
                     <td><?php echo $user['id']; ?></td>
@@ -135,5 +263,55 @@ $result = $conn->query($sql);
             <p>No data available</p>
         <?php endif; ?>
     </div>
+    <div class="container mt-5 text-center">
+        <button id="exportBtn" class="btn btn-success">Download CSV</button>
+    </div>
+
+    <script>
+        // document.getElementById("exportBtn").addEventListener("click", function () {
+        //     let csvContent = "data:text/csv;charset=utf-8,";
+        //     let table = document.querySelector("table");
+        //     let rows = table.querySelectorAll("tr");
+
+        //     rows.forEach(row => {
+        //         let cols = row.querySelectorAll("th, td");
+        //         let rowContent = Array.from(cols).map(col => col.textContent).join(",");
+        //         csvContent += rowContent + "\r\n";
+        //     });
+
+        //     // Create a link and trigger download
+        //     let encodedUri = encodeURI(csvContent);
+        //     let link = document.createElement("a");
+        //     link.setAttribute("href", encodedUri);
+        //     link.setAttribute("download", "user_data.csv");
+        //     document.body.appendChild(link);
+        //     link.click();
+        //     document.body.removeChild(link);
+        // });
+        document.getElementById("exportBtn").addEventListener("click", function () {
+            let csvContent = "data:text/csv;charset=utf-8,";
+            let table = document.getElementById("userDashboardTable");
+            let rows = table.querySelectorAll("tr");
+            rows.forEach(row => {
+                let cols = row.querySelectorAll("th, td");
+                let rowContent = Array.from(cols).map(col => col.textContent).join(",");
+                csvContent += rowContent + "\r\n";
+            });
+
+            const now = new Date();
+            const formattedDate = now.toLocaleDateString('en-GB').replace(/\//g, '-');
+            const formattedTime = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false }).replace(':', '-');
+
+            const username = "<?php echo $_SESSION['username']; ?>";
+
+            let encodedUri = encodeURI(csvContent);
+            let link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", `${username}_${formattedDate}_${formattedTime}.csv`);
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+    </script>
 </body>
 </html>

@@ -21,8 +21,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             header("Location: dashboard.php");
             exit();
         } else {
-            $_SESSION['error'] = "Invalid password.";
-            header("Location: login.php");
+            echo '<script>
+                    alert("Invalid password!");
+                    window.location.href = "login.php";
+                </script>';
+            // $_SESSION['error'] = "Invalid password.";
+            // header("Location: login.php");
             exit();
         }
     } else {
@@ -32,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 </script>';
         // $_SESSION['error'] = "No user found with that username.";
         // header("Location: login.php");
-        // exit();
+        exit();
     }
     
     // $conn->close();

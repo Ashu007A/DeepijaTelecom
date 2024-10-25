@@ -79,7 +79,7 @@ if ($result->num_rows > 0) {
             <li><a href="logout.php" class="<?php echo $current_page == 'logout.php' ? 'active' : ''; ?>" onclick="confirmLogout(event)">Logout</a></li>
             <li><a href="contact.php" class="<?php echo $current_page == 'contact.php' ? 'active' : ''; ?>">Contact</a></li>
             <li><a href="delete_account.php" class="<?php echo $current_page == 'delete_account.php' ? 'active' : ''; ?>">Delete Account</a></li>
-            <li><a href="change_user_password.php" class="<?php echo $current_page == 'change_user_password.php' ? 'active' : ''; ?>">Change Password</a></li>
+            <li><a href="change_user_password.php" class="<?php echo $current_page == 'change_user_password.php' ? 'active' : ''; ?>">Change Username/Password</a></li>
             <li><a href="edit_profile.php" class="<?php echo $current_page == 'edit_profile.php' ? 'active' : ''; ?>">Edit Profile</a></li>
             <li><a href="dashboard.php" class="<?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>">Dashboard</a></li>
         </ul>
@@ -92,8 +92,8 @@ if ($result->num_rows > 0) {
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" value="<?php echo $user['name']; ?>" required><br><br>
 
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="<?php echo $user['username']; ?>" required><br><br>
+        <!-- <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="<?php echo $user['username']; ?>" required><br><br> -->
 
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" value="<?php echo $user['email']; ?>" required><br><br>

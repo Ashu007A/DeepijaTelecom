@@ -29,6 +29,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
   <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <style>
+    .full-height {
+      height: 80vh;
+    }
     h2 {
       margin-top: 20%;
     }
@@ -47,6 +50,9 @@ $current_page = basename($_SERVER['PHP_SELF']);
     }
   </style>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
   <script>
         function confirmLogout(event) {
             event.preventDefault();
@@ -64,16 +70,20 @@ $current_page = basename($_SERVER['PHP_SELF']);
           <li><a href="logout.php" class="<?php echo $current_page == 'logout.php' ? 'active' : ''; ?>" onclick="confirmLogout(event)">Logout</a></li>
           <li><a href="contact.php" class="<?php echo $current_page == 'contact.php' ? 'active' : ''; ?>">Contact</a></li>
           <li><a href="delete_account.php" class="<?php echo $current_page == 'delete_account.php' ? 'active' : ''; ?>">Delete Account</a></li>
-          <li><a href="change_user_password.php" class="<?php echo $current_page == 'change_user_password.php' ? 'active' : ''; ?>">Change Password</a></li>
+          <li><a href="change_user_password.php" class="<?php echo $current_page == 'change_user_password.php' ? 'active' : ''; ?>">Change Username/Password</a></li>
           <li><a href="edit_profile.php" class="<?php echo $current_page == 'edit_profile.php' ? 'active' : ''; ?>">Edit Profile</a></li>
           <li><a href="dashboard.php" class="<?php echo $current_page == 'dashboard.php' ? 'active' : ''; ?>">Dashboard</a></li>
         </ul>
     </nav>
-    <h2>Contact Us</h1>
-    <p>Ashish Kumar Ram</p>
-    <p>Software Engineer Intern</p>
-    <p>Deepija Telecom Pvt. Ltd.</p>
-    <p>+91 xxxxx-xxxxx</p>
-    <p>ashishkumar_r@dev.deepijatel.com</p>
+    <div class="container d-flex justify-content-center align-items-center full-height">
+        <div class="text-center">
+            <h2>Contact Us</h2>
+            <p>Ashish Kumar Ram</p>
+            <p>Software Engineer Intern</p>
+            <p>Deepija Telecom Pvt. Ltd.</p>
+            <p>+91 xxxxx-xxxxx</p>
+            <p>ashishkumar_r@dev.deepijatel.com</p>
+        </div>
+    </div>
 </body>
 </html>

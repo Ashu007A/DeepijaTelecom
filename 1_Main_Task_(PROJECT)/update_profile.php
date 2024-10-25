@@ -24,7 +24,7 @@ $_SESSION['last_activity'] = time();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = $_POST["name"];
-    $username = $_POST["username"];
+    // $username = $_POST["username"];
     $email = $_POST["email"];
     // $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $phone = $_POST["phone"];
@@ -43,7 +43,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $sql = "UPDATE users SET
         name='$name',
-        username='$username',
         email='$email',
         phone='$phone',
         state='$state',
