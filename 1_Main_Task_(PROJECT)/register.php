@@ -6,6 +6,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <html>
 <head>
   <title>Register</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <style>
     body {
@@ -74,17 +75,19 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <label for="dob">Date of Birth:</label>
     <input type="date" id="dob" name="dob" required><br><br>
     <label for="gender">Gender:</label>
-    <input type="radio" id="male" name="gender" value="male">
+    <input type="radio" id="male" name="gender" value="male" required>
     <label for="male">Male</label>
-    <input type="radio" id="female" name="gender" value="female">
+    <input type="radio" id="female" name="gender" value="female" required>
     <label for="female">Female</label><br><br>
-    <label for="course">Course Selection:</label>
-    <input type="checkbox" id="course1" name="course" value="course1">
-    <label for="MERN">MERN Stack</label>
-    <input type="checkbox" id="course2" name="course" value="course2">
-    <label for="MEAN">Mean Stack</label><br><br>
+    <label for="course">Course Selection:</label><br>
+    <input type="checkbox" id="course1" name="course[]" value="MERN Stack">
+    <label for="course1">MERN Stack</label><br>
+    <input type="checkbox" id="course2" name="course[]" value="Mean Stack">
+    <label for="course2">Mean Stack</label><br>
+    <input type="checkbox" id="course3" name="course[]" value="Full Stack">
+    <label for="course3">Full Stack</label><br><br>
     <label for="address">Address:</label><br>
-    <textarea id="address" name="address" rows="4" cols="50"></textarea><br><br>
+    <textarea id="address" name="address" rows="4" cols="50" required></textarea><br><br>
     <!-- <label for="file">Upload Profile Image:</label>
     <input type="file" id="file" name="file"><br><br> -->
     <input type="reset" value="Reset" style="float: left; margin-left: 70px;">

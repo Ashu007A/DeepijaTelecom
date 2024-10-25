@@ -1,6 +1,5 @@
 [
-    {"id": "chhattisgarh", "name": "Chhattisgarh"},
-    {"id": "hyderabad", "name": "Hyderabad"},
-    {"id": "maharashtra", "name": "Maharashtra"}
+    {"id": "Chhattisgarh", "name": "Chhattisgarh"},
+    {"id": "Telangana", "name": "Telangana"},
+    {"id": "Maharashtra", "name": "Maharashtra"}
 ]
-  

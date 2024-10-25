@@ -44,6 +44,7 @@ if (isset($_GET['id'])) {
 <html>
 <head>
     <title>Edit Profile</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
         form {
@@ -53,7 +54,7 @@ if (isset($_GET['id'])) {
         h1 {
             font-size: larger;
             float: left;
-            color: yellow;
+            color: #ff9a9e;
         }
         .active {
             color: black;
@@ -118,14 +119,16 @@ if (isset($_GET['id'])) {
         <input type="radio" id="female" name="gender" value="female" <?php echo ($user['gender'] == 'female') ? 'checked' : ''; ?>>
         <label for="female">Female</label><br><br>
 
-        <label for="course">Course Selection:</label>
+        <label for="course">Course Selection:</label><br>
         <?php 
         $courses = explode(", ", $user['course']);
         ?>
         <input type="checkbox" id="course1" name="course[]" value="MERN Stack" <?php echo (in_array('MERN Stack', $courses)) ? 'checked' : ''; ?>>
-        <label for="course1">MERN Stack</label>
+        <label for="course1">MERN Stack</label><br>
         <input type="checkbox" id="course2" name="course[]" value="Mean Stack" <?php echo (in_array('Mean Stack', $courses)) ? 'checked' : ''; ?>>
-        <label for="course2">Mean Stack</label><br><br>
+        <label for="course2">Mean Stack</label><br>
+        <input type="checkbox" id="course3" name="course[]" value="Full Stack" <?php echo (in_array('Full Stack', $courses)) ? 'checked' : ''; ?>>
+        <label for="course3">Full Stack</label><br><br>
 
         <label for="address">Address:</label><br>
         <textarea id="address" name="address" rows="4" cols="50"><?php echo $user['address']; ?></textarea><br><br>

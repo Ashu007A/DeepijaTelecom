@@ -1,15 +1,15 @@
 {
-  "chhattisgarh": [
-    {"id": "bilaspur", "name": "Bilaspur District"},
-    {"id": "durg", "name": "Durg District"},
-    {"id": "raipur", "name": "Raipur District"}
+  "Chhattisgarh": [
+    {"id": "Bilaspur", "name": "Bilaspur District"},
+    {"id": "Durg", "name": "Durg District"},
+    {"id": "Raipur", "name": "Raipur District"}
   ],
-  "hyderabad": [
-    {"id": "hyderabad", "name": "Hyderabad District"},
-    {"id": "secunderabad", "name": "Secunderabad District"}
+  "Telangana": [
+    {"id": "Hyderabad", "name": "Hyderabad District"},
+    {"id": "Secunderabad", "name": "Secunderabad District"}
   ],
-  "maharashtra": [
-    {"id": "mumbai", "name": "Mumbai District"},
-    {"id": "pune", "name": "Pune District"}
+  "Maharashtra": [
+    {"id": "Mumbai", "name": "Mumbai District"},
+    {"id": "Pune", "name": "Pune District"}
   ]
 }

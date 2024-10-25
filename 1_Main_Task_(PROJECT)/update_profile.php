@@ -39,19 +39,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $user_id = $_SESSION['userid'];
 
-    $sql = "UPDATE users SET 
-            name='$name', 
-            username='$username', 
-            email='$email', 
-            phone='$phone', 
-            state='$state', 
-            district='$district', 
-            city='$city', 
-            dob='$dob', 
-            gender='$gender', 
-            course='$course', 
-            address='$address' 
-            WHERE id='$user_id'";
+    $course = implode(", ", $_POST["course"]);
+
+    $sql = "UPDATE users SET
+        name='$name',
+        username='$username',
+        email='$email',
+        phone='$phone',
+        state='$state',
+        district='$district',
+        city='$city',
+        dob='$dob',
+        gender='$gender',
+        course='$course',
+        address='$address'
+        WHERE id='$user_id'";
 
     // if ($password) {
     //     $sql = "UPDATE users SET 

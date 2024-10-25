@@ -32,6 +32,7 @@ $result = $conn->query($sql);
 <html>
 <head>
     <title>Dashboard</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
         h1 {

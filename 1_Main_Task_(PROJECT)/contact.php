@@ -26,6 +26,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <html>
 <head>
   <title>Contact</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <style>
     h2 {

@@ -26,6 +26,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
 <html>
 <head>
   <title>Register</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
   <link rel="stylesheet" type="text/css" href="styles.css">
   <style>
     form {
@@ -35,7 +36,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     h1 {
       font-size: larger;
       float: left;
-      color: yellow;
+      color: #ff9a9e;
     }
     .active {
       color: black;

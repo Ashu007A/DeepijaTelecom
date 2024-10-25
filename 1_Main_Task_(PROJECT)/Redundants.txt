@@ -118,3 +118,40 @@ comment aall thhe code  ttake seepartte file jjsut usse2,,3 coloumnns inseert in
 I've added a new button "Add New User", make it so that it will give popup and than takes us to 'register.php'.
 
 
+
+
+
+
+<?php
+
+include "db_connect.php";
+
+$name = $_POST["name"];
+$username = $_POST["username"];
+$email = $_POST["email"];
+$password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+$phone = $_POST["phone"];
+$state = $_POST["state"];
+$district = $_POST["district"];
+$city = $_POST["city"];
+$dob = $_POST["dob"];
+$gender = $_POST["gender"];
+$course = $_POST["course"];
+$address = $_POST["address"];
+
+$course = implode(", ", $_POST["course"]);
+
+$sql = "INSERT INTO users (name, username, email, password, phone, state, district, city, dob, gender, course, address) 
+        VALUES ('$name', '$username', '$email', '$password', '$phone', '$state', '$district', '$city', '$dob', '$gender', '$course', '$address')";
+
+if ($conn->query($sql) === TRUE) {
+    // echo "New record created successfully!";
+    // header("Location: login.php");
+    echo '<script>
+                alert("New account created successfully! Please Login!");
+                window.location.href = "login.php";
+            </script>';
+} else {
+    echo "Error: " . $sql . "<br>" . $conn->error;
+}
+?>

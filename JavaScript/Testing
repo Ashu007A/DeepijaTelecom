@@ -1,4 +1,1 @@
 Yo!
-
-Now I want to added 'change password' in the nav bar, so create a change_user_password.php in which it will take old password for validation and take new password and re-enter new password and a change password button.
-Then when I say we'll move on to process_password_change.php for processing the input and validating it.

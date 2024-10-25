@@ -24,6 +24,7 @@ $_SESSION['last_activity'] = time();
 <html>
 <head>
     <title>Change Password</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="styles.css">
     <style>
         form {

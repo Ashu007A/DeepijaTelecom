@@ -48,9 +48,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 // echo '<script>alert("Password changed successfully! Please Login again.")</script>';
                 // header("Location: login.php");
                 echo '<script>
-                    alert("Password changed successfully! Please Login again.");
-                    window.location.href = "login.php";
-                </script>';
+                        alert("Password changed successfully! Please Login again.");
+                        window.location.href = "login.php";
+                    </script>';
                 exit();
             } else {
                 echo "Error updating password: " . $conn->error;

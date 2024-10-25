@@ -35,8 +35,12 @@ $sql = "INSERT INTO users (name, username, email, password, phone, state, distri
         VALUES ('$name', '$username', '$email', '$password', '$phone', '$state', '$district', '$city', '$dob', '$gender', '$course', '$address')";
 
 if ($conn->query($sql) === TRUE) {
-    echo "New record created successfully!";
-    header("Location: admin_dashboard.php");
+    // echo "New record created successfully!";
+    // header("Location: admin_dashboard.php");
+    echo '<script>
+                alert("New record created successfully!");
+                window.location.href = "admin_dashboard.php";
+            </script>';
 } else {
     echo "Error: " . $sql . "<br>" . $conn->error;
 }

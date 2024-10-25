@@ -51,9 +51,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             WHERE id='$id'";
 
     if ($conn->query($sql) === TRUE) {
-        $_SESSION['message'] = "Profile updated successfully!";
-        header("Location: admin_dashboard.php");
-        exit();
+        // $_SESSION['message'] = "Profile updated successfully!";
+        // header("Location: admin_dashboard.php");
+        // exit();
+        echo '<script>
+                alert("Profile updated successfully!");
+                window.location.href = "admin_dashboard.php";
+            </script>';
     } else {
         $_SESSION['error'] = "Error updating profile: " . $conn->error;
         header("Location: admin_edit_profile.php?id=$id");
