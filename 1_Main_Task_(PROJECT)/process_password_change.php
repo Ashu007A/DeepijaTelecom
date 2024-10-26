@@ -26,7 +26,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Check
     if ($new_password !== $confirm_password) {
-        echo "New passwords do not match.";
+        echo '<script>
+                        alert("New passwords do not match!");
+                    </script>';
+        // echo "New passwords do not match.";
         exit();
     }
 
@@ -56,10 +59,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo "Error updating password: " . $conn->error;
             }
         } else {
-            echo "Old password is incorrect.";
+            echo '<script>
+                        alert("Old password is incorrect!");
+                    </script>';
+            // echo "Old password is incorrect.";
         }
     } else {
-        echo "User not found.";
+        echo '<script>
+                        alert("User not found!");
+                    </script>';
+        // echo "User not found.";
     }
 
     $conn->close();

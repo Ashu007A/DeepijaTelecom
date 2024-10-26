@@ -1,5 +1,10 @@
 <?php
 session_start();
+
+// Enable error reporting
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 if (!isset($_SESSION['username'])) {
     header("Location: login.php");
     exit();
@@ -57,6 +62,11 @@ $result = $conn->query($sql);
         h2 {
             text-align: center;
         }
+        .picture {
+            height: 400px;
+            width: 300px;
+            object-fit: cover;
+        }
         .active {
             color: black;
             font-weight: bold;
@@ -64,6 +74,7 @@ $result = $conn->query($sql);
         }
         #exportBtn {
             margin-bottom: 60px;
+            margin-left: 815px;
         }
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -153,7 +164,15 @@ $result = $conn->query($sql);
                 });
         }
 
-        document.addEventListener('DOMContentLoaded', updateDateTime);
+        function toggleUploadButton() {
+            const fileInput = document.getElementById('profilePictureInput');
+            const uploadButton = document.getElementById('uploadButton');
+            if (fileInput.files.length > 0) {
+                uploadButton.disabled = false;
+            } else {
+                uploadButton.disabled = true;
+            }
+        }
 
         function confirmLogout(event) {
             event.preventDefault();
@@ -196,8 +215,8 @@ $result = $conn->query($sql);
         <table class="table table-bordered" id="punchInOutTable">
             <thead>
                 <tr>
-                    <th>Punch In</i></th>
-                    <th>Punch Out</th>
+                    <th width="50%">Punch In</i></th>
+                    <th width="50%">Punch Out</th>
                 </tr>
             </thead>
             <tbody>
@@ -205,89 +224,107 @@ $result = $conn->query($sql);
             </tbody>
         </table>
     </div>
+
+
     <div class="container mt-5">
         <h2 class="text-center">User Dashboard</h2>
-        <?php if ($result->num_rows > 0): ?>
-            <?php $user = $result->fetch_assoc(); ?>
-            <table class="table table-bordered" id="userDashboardTable">
-                <tr>
-                    <th>ID</th>
-                    <td><?php echo $user['id']; ?></td>
-                </tr>
-                <tr>
-                    <th>Name</th>
-                    <td><?php echo $user['name']; ?></td>
-                </tr>
-                <tr>
-                    <th>Username</th>
-                    <td><?php echo $user['username']; ?></td>
-                </tr>
-                <tr>
-                    <th>Email</th>
-                    <td><?php echo $user['email']; ?></td>
-                </tr>
-                <tr>
-                    <th>Phone</th>
-                    <td><?php echo $user['phone']; ?></td>
-                </tr>
-                <tr>
-                    <th>State</th>
-                    <td><?php echo $user['state']; ?></td>
-                </tr>
-                <tr>
-                    <th>District</th>
-                    <td><?php echo $user['district']; ?></td>
-                </tr>
-                <tr>
-                    <th>City</th>
-                    <td><?php echo $user['city']; ?></td>
-                </tr>
-                <tr>
-                    <th>DOB</th>
-                    <td><?php echo $user['dob']; ?></td>
-                </tr>
-                <tr>
-                    <th>Gender</th>
-                    <td><?php echo $user['gender']; ?></td>
-                </tr>
-                <tr>
-                    <th>Course</th>
-                    <td><?php echo $user['course']; ?></td>
-                </tr>
-                <tr>
-                    <th>Address</th>
-                    <td><?php echo $user['address']; ?></td>
-                </tr>
-            </table>
-        <?php else: ?>
-            <p>No data available</p>
-        <?php endif; ?>
+        <div class="d-flex justify-content-center align-items-start">
+            <!-- Profile Picture Section -->
+            <div class="profile-pic-container mr-5 picture">
+                <?php
+                $profile_pic_path = "profile_pics/" . $username . ".jpg";
+                $cache_bust = isset($_GET['cache_bust']) ? $_GET['cache_bust'] : time();  // Use cache-busting parameter
+                if (file_exists($profile_pic_path)): ?>
+                    <img src="<?php echo $profile_pic_path; ?>" alt="Profile Picture" class="img-thumbnail picture" style="height: 400px; width: 300px; object-fit: cover;">
+                    <form action="upload_profile_picture.php" method="post" enctype="multipart/form-data">
+                        <input type="file" id="profilePictureInput" name="profile_picture" class="form-control-file mt-2" onchange="toggleUploadButton()">
+                        <button type="submit" id="uploadButton" class="btn btn-dark mt-2" disabled>Change Profile Picture</button>
+                    </form>
+                <?php else: ?>
+                    <img src="default_profile.png" alt="Default Profile Picture" class="img-thumbnail picture" style="height: 400px; width: 300px; object-fit: cover;">
+                    <form action="upload_profile_picture.php" method="post" enctype="multipart/form-data">
+                        <input type="file" id="profilePictureInput" name="profile_picture" class="form-control-file mt-2" onchange="toggleUploadButton()">
+                        <button type="submit" id="uploadButton" class="btn btn-dark mt-2" disabled>Upload Profile Picture</button>
+                    </form>
+                <?php endif; ?>
+            </div>
+            
+            <!-- User Data Table Section -->
+            <div>
+                <?php if ($result->num_rows > 0): ?>
+                    <?php $user = $result->fetch_assoc(); ?>
+                    <table class="table table-bordered" id="userDashboardTable">
+                        <tr>
+                            <th width="200px">ID</th>
+                            <td width="400px"><?php echo $user['id']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td><?php echo $user['name']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Username</th>
+                            <td><?php echo $user['username']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td><?php echo $user['email']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Phone</th>
+                            <td><?php echo $user['phone']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>State</th>
+                            <td><?php echo $user['state']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>District</th>
+                            <td><?php echo $user['district']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>City</th>
+                            <td><?php echo $user['city']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>DOB</th>
+                            <td><?php echo $user['dob']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Gender</th>
+                            <td><?php echo $user['gender']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Course</th>
+                            <td><?php echo $user['course']; ?></td>
+                        </tr>
+                        <tr>
+                            <th>Address</th>
+                            <td><?php echo $user['address']; ?></td>
+                        </tr>
+                    </table>
+                <?php else: ?>
+                    <p>No data available</p>
+                <?php endif; ?>
+            </div>
+        </div>
     </div>
+
     <div class="container mt-5 text-center">
         <button id="exportBtn" class="btn btn-success">Download CSV</button>
     </div>
 
     <script>
-        // document.getElementById("exportBtn").addEventListener("click", function () {
-        //     let csvContent = "data:text/csv;charset=utf-8,";
-        //     let table = document.querySelector("table");
-        //     let rows = table.querySelectorAll("tr");
+        function toggleUploadButton() {
+            const fileInput = document.getElementById('profilePictureInput');
+            const uploadButton = document.getElementById('uploadButton');
+            if (fileInput.files.length > 0) {
+                uploadButton.disabled = false;
+            } else {
+                uploadButton.disabled = true;
+            }
+        }
 
-        //     rows.forEach(row => {
-        //         let cols = row.querySelectorAll("th, td");
-        //         let rowContent = Array.from(cols).map(col => col.textContent).join(",");
-        //         csvContent += rowContent + "\r\n";
-        //     });
-
-        //     // Create a link and trigger download
-        //     let encodedUri = encodeURI(csvContent);
-        //     let link = document.createElement("a");
-        //     link.setAttribute("href", encodedUri);
-        //     link.setAttribute("download", "user_data.csv");
-        //     document.body.appendChild(link);
-        //     link.click();
-        //     document.body.removeChild(link);
-        // });
         document.getElementById("exportBtn").addEventListener("click", function () {
             let csvContent = "data:text/csv;charset=utf-8,";
             let table = document.getElementById("userDashboardTable");
