@@ -42,8 +42,8 @@ $current_page = basename($_SERVER['PHP_SELF']);
             text-align: center;
         }
         form {
-        margin: 30px auto;
-        width: 15%;
+            margin: 30px auto;
+            width: 15%;
         }
         .active {
             color: black;
@@ -53,6 +53,14 @@ $current_page = basename($_SERVER['PHP_SELF']);
     </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <script>
+        function confirmDeletion(event) {
+            event.preventDefault();
+            var userConfirmed = confirm("Are you sure you want to delete your account? This action cannot be undone.");
+            if (userConfirmed) {
+                event.target.submit();
+            }
+        }
+
         function confirmLogout(event) {
             event.preventDefault();
             var userConfirmed = confirm("Are you sure you want to log out?");
@@ -77,7 +85,7 @@ $current_page = basename($_SERVER['PHP_SELF']);
     <h2>Delete Account</h2>
     <br><br><br><br><br><br><br>
     <p>Are you sure you want to delete your account?</p>
-    <form action="delete_account_process.php" method="post">
+    <form action="delete_account_process.php" method="post" onsubmit="confirmDeletion(event)">
         <input type="submit" value="Yes, delete my account" style="background-color: red; color: white;">
     </form>
 </body>
